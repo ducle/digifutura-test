@@ -16,7 +16,13 @@ class FileNode < ApplicationRecord
 
   before_save :caching_ancestry_values
 
+  def is_folder?
+    self.node_type == NODE_TYPES[:folder]
+  end
 
+  def is_file?
+    self.node_type == NODE_TYPES[:file]
+  end
 
   #  NOTE
   # from parent, grandparent, great grandparent...
