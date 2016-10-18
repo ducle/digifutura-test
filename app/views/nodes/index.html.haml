@@ -9,3 +9,7 @@
 = render partial: 'nodes/list', locals: {nodes: @nodes}
 
 = render partial: 'nodes/fileupload'
+
+#sharingModal.modal.fade(tabindex="-1" role="dialog")
+  .modal-dialog(role="document")
+    .modal-content

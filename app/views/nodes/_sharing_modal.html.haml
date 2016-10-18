@@ -1,4 +1,4 @@
-= form_for file_node, url: share_node_path(file_node), method: :put do |f|
+= form_for file_node, url: share_node_path(file_node), method: :post do |f|
   .modal-header
     %button(type="button" class="close" data-dismiss="modal" aria-label="Close")
       %span(aria-hidden="true")
@@ -9,7 +9,8 @@
 
   .modal-body
     %p
-      %input(type="text" class="form-control" id="tokenfield" value="red,green,blue")
+      .form-group
+        = text_field_tag "file_node[user_ids][]", nil, class: 'form-control', id: 'tokenfield', placeholder: 'Enter name...'
     %div
 
   .modal-footer

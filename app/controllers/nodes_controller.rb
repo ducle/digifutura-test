@@ -44,9 +44,19 @@ class NodesController < ApplicationController
     @file_node = FileNode.find(params[:id])
   end
 
+  def share
+    @file_node = FileNode.find(params[:id])
+    @file_node.user_ids = share_param[:user_ids]
+    redirect_to node_path(@file_node.parent || @file_node)
+  end
+
   private
 
   def node_param
     params.require(:file_node).permit(:name, :file, :parent_id)
+  end
+
+  def share_param
+    params.require(:file_node).permit(:user_ids => [])
   end
 end
