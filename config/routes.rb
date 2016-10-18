@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sharings, only: [:show, :index]
+
   root to: 'home#index'
 
   resources :questions, except: [:new]

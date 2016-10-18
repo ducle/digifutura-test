@@ -2,20 +2,20 @@ class NodesController < ApplicationController
   layout 'landing'
 
   def index
-    @nodes = FileNode.roots.by_name.page(params[:page])
+    @nodes = my_nodes.roots.by_name.page(params[:page])
   end
 
   def show
-    @file_node = FileNode.find(params[:id])
+    @file_node = my_nodes.find(params[:id])
     @nodes = @file_node.children.by_name.page(params[:page])
   end
 
   def new
-    @file_node = FileNode.folders.new(owner_id: current_user.id, parent_id: params[:parent_id])
+    @file_node = my_nodes.folders.new(owner_id: current_user.id, parent_id: params[:parent_id])
   end
 
   def create
-    @file_node = FileNode.folders.new(node_param)
+    @file_node = my_nodes.folders.new(node_param)
     @file_node.owner_id = current_user.id
     if @file_node.save
       redirect_to nodes_path
@@ -25,7 +25,7 @@ class NodesController < ApplicationController
   end
 
   def upload
-    @file_node = FileNode.files.new(owner_id: current_user.id)
+    @file_node = my_nodes.files.new(owner_id: current_user.id)
     if params[:files] && file = params[:files].first
       @file_node.file = file
       @file_node.parent_id = params[:parent_id]
@@ -41,10 +41,17 @@ class NodesController < ApplicationController
 
 
   def sharing
-    @file_node = FileNode.find(params[:id])
+    @file_node = my_nodes.find(params[:id])
   end
 
   def share
+    @file_node = my_nodes.find(params[:id])
+    @file_node.user_ids = share_param[:user_ids]
+    redirect_to node_path(@file_node.parent || @file_node)
+  end
+
+  #  shared with me
+  def shared
     @file_node = FileNode.find(params[:id])
     @file_node.user_ids = share_param[:user_ids]
     redirect_to node_path(@file_node.parent || @file_node)
@@ -58,5 +65,9 @@ class NodesController < ApplicationController
 
   def share_param
     params.require(:file_node).permit(:user_ids => [])
+  end
+
+  def my_nodes
+    current_user.file_nodes
   end
 end

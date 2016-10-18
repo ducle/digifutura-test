@@ -1,0 +1,39 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        Name
+      %th
+        Modified
+      %th
+        Owner
+  %tbody
+    - if @file_node
+      %tr
+        - if @file_node.parent
+          %th= link_to "...", node_path(@file_node.parent)
+        - else
+          %th= link_to "Back to Files....", nodes_path
+        %th
+        %th
+    - nodes.each do |node|
+      %tr
+        %th
+          - if node.is_file?
+            %i.fa.fa-file-o
+            = node.name
+          - else
+            %i.fa.fa-folder-o
+            = link_to node.name, sharing_path(node)
+        %th
+          - if node.is_file?
+            = node.updated_at.strftime('%m/%d/%Y %H:%M')
+          - else
+            \-.-
+        %th
+          - if node.owner
+            %span.label.label-success= node.owner.name
+
+
+.text-center
+  = paginate nodes
