@@ -1,2 +1,11 @@
-%h1 Nodes#show
-%p Find me in app/views/nodes/show.html.haml
+%h1
+  = @file_node.name
+  %span.pull-right
+    -# %input#fileupload(title="Upload file" type="file")
+    -#   %i.fa.fa-file-o
+    = link_to new_node_path(parent_id: @file_node.try(:id)), class: 'btn btn-primary', title: 'New Folder' do
+      %i.fa.fa-folder-o
+.progress-bar
+= render partial: 'nodes/list', locals: {nodes: @nodes}
+
+= render partial: 'nodes/fileupload'

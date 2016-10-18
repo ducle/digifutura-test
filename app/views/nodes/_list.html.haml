@@ -13,12 +13,15 @@
         %th
           - if node.is_file?
             %i.fa.fa-file-o
+            = node.name
           - else
             %i.fa.fa-folder-o
-          = node.name
+            = link_to node.name, node_path(node)
         %th
           - if node.is_file?
             = node.updated_at.strftime('%m/%d/%Y %H:%M')
           - else
             \-.-
         %th
+.text-center
+  = paginate nodes

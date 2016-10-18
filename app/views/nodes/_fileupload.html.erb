@@ -1,4 +1,4 @@
-<input id="fileupload" type="file">
+<input id="fileupload" type="file" data-parent-id="<%= @file_node.try(:id) %>" multiple="false">
 
 <script>
   $(function () {
@@ -6,13 +6,16 @@
           url: "<%= upload_nodes_path %>",
           dataType: 'json',
           type: 'POST',
+          multipart: true,
           formData: {parent_id: $('#fileupload').data('parentId')},
           add: function (e, data) {
-              data.context = $('p').text('Uploading...').appendTo(document.body);
-              data.submit();
+            data.context = $('p').text('Uploading...').appendTo(document.body);
+            data.submit();
           },
           done: function (e, data) {
-              data.context.text('Upload finished.');
+            console.log(data);
+            console.log(data.result);
+            data.context.text('Upload finished.');
           }
       });
   });

@@ -4,17 +4,20 @@ class FileNode < ApplicationRecord
     file: "file"
   }
 
-  belongs_to :parent, class_name: 'FileNode'
+  belongs_to :parent, class_name: 'FileNode', optional: true
   has_many :children, class_name: 'FileNode', foreign_key: :parent_id
-  belongs_to :owner, class_name: 'User', foreign_key: :owner_id
+  belongs_to :owner, class_name: 'User', foreign_key: :owner_id, optional: true
+
   has_and_belongs_to_many :users
 
   mount_uploader :file, FileUploader
-  
+
   acts_as_list scope: :parent_id
   acts_as_taggable_on :labels
 
   scope :roots, -> { where(parent_id: nil) }
+  scope :folders, -> { where(node_type: NODE_TYPES[:folder])}
+  scope :files, -> { where(node_type: NODE_TYPES[:file]) }
 
   before_save :caching_ancestry_values
 

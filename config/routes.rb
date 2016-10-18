@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :nodes, path: 'files', only: [:show, :index, :create] do
+  resources :nodes, path: 'files', only: [:show, :index, :create, :new] do
     collection do
       post :upload
     end
-    
+
   end
 
   root to: 'home#index'
