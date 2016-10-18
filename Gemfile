@@ -35,6 +35,7 @@ gem 'simple_form', '~> 3.2.1'
 # ==============
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'acts_as_list', '~> 0.8.2'
+gem 'cocoon'
 gem 'kaminari', '0.17.0'
 
 gem 'carrierwave', "1.0.0.beta"

@@ -1,0 +1,18 @@
+%h3 Questions
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Content
+      %th Point
+      %th
+      %th
+      %th
+  %tbody
+    - questions.each do |question|
+      %tr
+        %td= question.content
+        %td.w200= question.point
+        %td.wbtn= link_to 'Show', question
+        %td.wbtn= link_to 'Edit', edit_question_path(question)
+        %td.wbtn= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' }

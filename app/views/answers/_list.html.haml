@@ -1,0 +1,10 @@
+%h3 Answers
+
+%table.table.table-hover
+  %tbody
+    - answers.each do |answer|
+      %tr
+        %td
+          = answer.content
+          - if answer.is_answer
+            %strong (correct)
