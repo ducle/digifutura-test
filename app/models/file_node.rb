@@ -26,13 +26,11 @@ class FileNode < ApplicationRecord
     self.node_type == NODE_TYPES[:file]
   end
 
-  #  NOTE
   # from parent, grandparent, great grandparent...
   def ancestor_ids
     self.ancestry.split('/').map{|a| a.to_i}.reverse
   end
 
-  #  NOTE
   # get parent, grandparent, and great grandparent
   def ancestors
     FileNode.where(id: ancestor_ids).order("LENGTH(ancestry) DESC")
@@ -45,6 +43,12 @@ class FileNode < ApplicationRecord
   def add_child(node)
     node.parent_id = self.id
     node.save
+  end
+
+  def can_view_by_user?(user)
+    owner_id == user.id ||
+    user.accessible_file_nodes.pluck(:id).include?(self.id) ||
+    (user.accessible_file_nodes.pluck(:id) & ancestor_ids).any?
   end
 
   private
