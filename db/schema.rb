@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018082352) do
+ActiveRecord::Schema.define(version: 20161018091848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20161018082352) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "owner_id"
+    t.index ["owner_id"], name: "index_questionnaires_on_owner_id", using: :btree
   end
 
   create_table "questions", force: :cascade do |t|
@@ -89,9 +91,10 @@ ActiveRecord::Schema.define(version: 20161018082352) do
   create_table "user_answers", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "question_id"
-    t.string   "answer"
+    t.integer  "answer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["answer_id"], name: "index_user_answers_on_answer_id", using: :btree
     t.index ["question_id"], name: "index_user_answers_on_question_id", using: :btree
     t.index ["user_id"], name: "index_user_answers_on_user_id", using: :btree
   end
