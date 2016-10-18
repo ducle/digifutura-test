@@ -23,12 +23,14 @@
       = render 'layouts/navigation'
 
     %main.container
+      .row#flash-messages
+
       .row
         .col-md-3
           = render 'layouts/sidebar'
-          
+
         .col-md-9
           = yield
 
       %footer
-        %p &copy; Company 2016
+        //%p &copy; Company 2016

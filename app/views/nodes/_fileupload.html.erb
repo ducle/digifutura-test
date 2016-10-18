@@ -13,6 +13,11 @@
             data.submit();
           },
           done: function (e, data) {
+            if(data.result.status == 'OK'){
+              $("#flash-messages").html("<div class='alert alert-success fade in'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>Success!</strong> File has been uploaded.</div>")
+            } else {
+              $("#flash-messages").html("<div class='alert alert-danger fade in'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>Error!</strong>"+data.result.message+"</div>")
+            }
             location.reload();
           }
       });
