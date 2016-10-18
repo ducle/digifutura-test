@@ -13,9 +13,9 @@ class CreateFileNodes < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_column :file_nodes, :ancestry
-    add_column :file_nodes, :parent_id
-    add_column :file_nodes, :owner_id
-    
+    add_index :file_nodes, :ancestry
+    add_index :file_nodes, :parent_id
+    add_index :file_nodes, :owner_id
+
   end
 end
