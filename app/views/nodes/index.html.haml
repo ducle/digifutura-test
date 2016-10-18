@@ -1,2 +1,9 @@
-%h1 Nodes#index
-%p Find me in app/views/nodes/index.html.haml
+%h1
+  Files
+  %span.pull-right
+    -# %input#fileupload(title="Upload file" type="file")
+    -#   %i.fa.fa-file-o
+    %a.btn.btn-primary(title="Add folder")
+      %i.fa.fa-folder-o
+.progress-bar
+= render partial: 'nodes/fileupload'

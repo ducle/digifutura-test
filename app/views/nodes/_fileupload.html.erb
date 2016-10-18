@@ -1,0 +1,19 @@
+<input id="fileupload" type="file">
+
+<script>
+  $(function () {
+      $('#fileupload').fileupload({
+          url: "<%= upload_nodes_path %>",
+          dataType: 'json',
+          type: 'POST',
+          formData: {parent_id: $('#fileupload').data('parentId')},
+          add: function (e, data) {
+              data.context = $('p').text('Uploading...').appendTo(document.body);
+              data.submit();
+          },
+          done: function (e, data) {
+              data.context.text('Upload finished.');
+          }
+      });
+  });
+</script>

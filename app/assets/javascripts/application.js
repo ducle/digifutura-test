@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require libs/jquery.ui.widget
+//= require libs/jquery.iframe-transport
+//= require libs/jquery.fileupload
 //= require_tree .

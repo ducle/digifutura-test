@@ -30,6 +30,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+# gem "jquery-fileupload-rails"
 
 # ==============
 # template
@@ -42,6 +43,7 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'acts_as_list', '~> 0.8.2'
 gem 'kaminari', '0.17.0'
 
+gem 'carrierwave', "1.0.0.beta"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

@@ -13,5 +13,8 @@ class NodesController < ApplicationController
 
   end
 
-  
+  def upload
+    puts params.inspect
+  end
+
 end

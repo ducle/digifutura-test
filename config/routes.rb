@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :nodes, path: 'files', only: [:show, :index, :create] do
+    collection do
+      post :upload
+    end
     
   end
 
