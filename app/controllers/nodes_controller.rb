@@ -40,6 +40,10 @@ class NodesController < ApplicationController
   end
 
 
+  def sharing
+    @file_node = FileNode.find(params[:id])
+  end
+
   private
 
   def node_param

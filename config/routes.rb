@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     collection do
       post :upload
     end
-
+    member do
+      get :sharing
+      post :share
+    end
   end
 
   root to: 'home#index'

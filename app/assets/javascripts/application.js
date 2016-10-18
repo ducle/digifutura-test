@@ -17,4 +17,5 @@
 //= require libs/jquery.ui.widget
 //= require libs/jquery.iframe-transport
 //= require libs/jquery.fileupload
+//= require libs/bootstrap-tokenfield.min
 //= require_tree .

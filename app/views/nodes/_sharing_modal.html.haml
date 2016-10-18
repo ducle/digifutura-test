@@ -1,0 +1,19 @@
+= form_for file_node, url: share_node_path(file_node), method: :put do |f|
+  .modal-header
+    %button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+      %span(aria-hidden="true")
+        &times;
+    %h4.modal-title
+      %i.fa.fa-share-alt
+      = file_node.name
+
+  .modal-body
+    %p
+      %input(type="text" class="form-control" id="tokenfield" value="red,green,blue")
+    %div
+
+  .modal-footer
+    %button(type="button" class="btn btn-default" data-dismiss="modal")
+      Close
+    %button(type="button" class="btn btn-primary" type="submit")
+      Save changes

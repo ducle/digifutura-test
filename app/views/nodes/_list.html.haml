@@ -23,5 +23,8 @@
           - else
             \-.-
         %th
+          = link_to sharing_node_path(node), remote: true, title: "Share #{node.name}", class: 'pull-right' do
+            %i.fa.fa-share(aria-hidden="true")
+            
 .text-center
   = paginate nodes

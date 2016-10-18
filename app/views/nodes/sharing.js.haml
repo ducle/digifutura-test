@@ -1,0 +1,9 @@
+$('#sharingModal .modal-content').html("#{escape_javascript(render partial: 'sharing_modal', locals: {file_node: @file_node}) }");
+$('#sharingModal').modal('show');
+$('#tokenfield').tokenfield({
+autocomplete: {
+source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
+delay: 100
+},
+showAutocompleteOnFocus: true
+})
