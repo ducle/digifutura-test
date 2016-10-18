@@ -18,6 +18,7 @@ class QuestionnairesController < ApplicationController
 
   def create
     @questionnaire = Questionnaire.new(questionnaire_params)
+    @questionnaire.owner = current_user
     if @questionnaire.save
       redirect_to @questionnaire, notice: 'Questionnaire was successfully created.'
     else
