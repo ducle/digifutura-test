@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.5'
 #  asset gems
 gem 'therubyracer', platforms: :ruby
 gem "less-rails"
-gem "twitter-bootstrap-rails", '~> 2.2.7'
+gem 'bootstrap-sass'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -55,6 +55,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do

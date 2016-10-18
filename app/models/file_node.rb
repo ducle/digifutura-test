@@ -6,6 +6,8 @@ class FileNode < ApplicationRecord
 
   belongs_to :parent, class_name: 'FileNode'
   has_many :children, class_name: 'FileNode', foreign_key: :parent_id
+  belongs_to :owner, class_name: 'User', foreign_key: :owner_id
+  has_and_belongs_to_many :users
 
   acts_as_list scope: :parent_id
   acts_as_taggable_on :labels
