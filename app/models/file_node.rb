@@ -36,7 +36,7 @@ class FileNode < ApplicationRecord
 
   # from parent, grandparent, great grandparent...
   def ancestor_ids
-    self.ancestry.split('/').map{|a| a.to_i}.reverse
+    self.ancestry.split('/').select{|s| !s.blank?}.map{|a| a.to_i}.reverse
   end
 
   # get parent, grandparent, and great grandparent
@@ -60,7 +60,7 @@ class FileNode < ApplicationRecord
   end
 
   def can_access_by_user?(user)
-    self.owner_id == user.id || self.ancestor_ids.select{|nid| user.accessible_file_node_ids.include?(nid)}.count > 0
+    self.owner_id == user.id || user.accessible_file_node_ids.include?(self.id) || self.ancestor_ids.select{|nid| user.accessible_file_node_ids.include?(nid)}.count > 0
   end
 
   private
