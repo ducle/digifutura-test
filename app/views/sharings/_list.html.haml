@@ -34,6 +34,10 @@
           - if node.owner
             %span.label.label-success= node.owner.name
 
-
+          - if node.is_file?
+            = link_to node.file.url, title: "Download file #{node.name}", class: 'pull-right', target: '_blank' do
+              &nbsp;
+              %i.fa.fa-download(aria-hidden="true")
+              &nbsp;
 .text-center
   = paginate nodes
