@@ -11,8 +11,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: {minimum: 2, maximum: 40}
 
-  def can_access_node?(node)
-    true
-  end
+
 
 end

@@ -6,7 +6,7 @@ class SharingsController < ApplicationController
 
   def show
     @file_node = FileNode.find(params[:id])
-    unless current_user.can_access_node?(@file_node)
+    unless @file_node.can_access_by_user?(current_user)
       redirect_to sharings_path and return
     end
     @nodes = @file_node.children.by_name.page(params[:page])

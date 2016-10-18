@@ -59,6 +59,10 @@ class FileNode < ApplicationRecord
     (user.accessible_file_nodes.pluck(:id) & ancestor_ids).any?
   end
 
+  def can_access_by_user?(user)
+    self.owner_id == user.id || self.ancestor_ids.select{|nid| user.accessible_file_node_ids.include?(nid)}.count > 0
+  end
+
   private
   def caching_ancestry_values
     if self.parent
