@@ -8,3 +8,9 @@ main {
 .w200 {
   width: 200px;
 }
+
+tbody.show {
+  td:first-child {
+    font-weight: bold;
+  }
+}

@@ -1,11 +1,13 @@
 %p#notice= notice
 
-
 = link_to 'Edit', edit_questionnaire_path(@questionnaire)
 \|
 = link_to 'Back', questionnaires_path
+\|
+= link_to 'Add question', new_questionnaire_question_path(questionnaire_id: @questionnaire)
 
-%table.table
-  %tbody
-    %td.w200 Name:
-    %td= @questionnaire.name
+%h1= @questionnaire.name
+
+
+- if @questionnaire.questions.count > 0
+  = render 'questions/list', questions: @questionnaire.questions

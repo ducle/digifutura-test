@@ -1,0 +1,10 @@
+= simple_form_for(@question) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :questionnaire_id, as: :hidden
+    = f.input :content
+    = f.input :point, input_html: {min: 0}
+
+  .form-actions
+    = f.button :submit
