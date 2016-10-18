@@ -19,6 +19,8 @@ class FileNode < ApplicationRecord
   scope :folders, -> { where(node_type: NODE_TYPES[:folder])}
   scope :files, -> { where(node_type: NODE_TYPES[:file]) }
 
+  scope :by_name, -> { order('name asc') }
+
   before_save :caching_ancestry_values
 
 
