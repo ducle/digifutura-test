@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018082347) do
+ActiveRecord::Schema.define(version: 20161018082352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,16 @@ ActiveRecord::Schema.define(version: 20161018082347) do
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
+  create_table "user_answers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.string   "answer"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_user_answers_on_question_id", using: :btree
+    t.index ["user_id"], name: "index_user_answers_on_user_id", using: :btree
+  end
+
   create_table "user_quizzes", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "questionnaire_id"
@@ -116,6 +126,8 @@ ActiveRecord::Schema.define(version: 20161018082347) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "questions", "questionnaires"
+  add_foreign_key "user_answers", "questions"
+  add_foreign_key "user_answers", "users"
   add_foreign_key "user_quizzes", "questionnaires"
   add_foreign_key "user_quizzes", "users"
 end
