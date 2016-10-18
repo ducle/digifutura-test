@@ -11,8 +11,6 @@
     .collapse.navbar-collapse
       - if current_user
         %ul.nav.navbar-nav
-          %li= link_to "Paper", ""
-          %li= link_to "Photos", ""
           %li= link_to "Questionnaires", questionnaires_path
           %li= link_to "Quizzes", quizzes_path
           %li= link_to "Files", nodes_path
