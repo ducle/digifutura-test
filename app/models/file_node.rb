@@ -1,4 +1,9 @@
 class FileNode < ApplicationRecord
+  NODE_TYPES = {
+    folder: "folder",
+    file: "file"
+  }
+
   belongs_to :parent, class_name: 'FileNode'
   has_many :children, class_name: 'FileNode', foreign_key: :parent_id
 
@@ -9,8 +14,22 @@ class FileNode < ApplicationRecord
 
   before_save :caching_ancestry_values
 
+
+
+  #  NOTE
+  # from parent, grandparent, great grandparent...
+  def ancestor_ids
+    self.ancestry.split('/').map{|a| a.to_i}.reverse
+  end
+
+  #  NOTE
+  # get parent, grandparent, and great grandparent
+  def ancestors
+    FileNode.where(id: ancestor_ids).order("LENGTH(ancestry) DESC")
+  end
+
   def descendants
-    where("LOWER(ancestry) LIKE ?", "#{self.ancestry}/%")
+    where("LOWER(ancestry) LIKE ?", "#{self.ancestry}#{self.id}/%")
   end
 
   def add_child(node)
@@ -21,7 +40,9 @@ class FileNode < ApplicationRecord
   private
   def caching_ancestry_values
     if self.parent
-      self.ancestry = [parent.ancestry, self.parent_id].compact.join('/')
+      self.ancestry = "#{parent.ancestry}#{self.parent_id}/"
+    else
+      self.ancestry = '/'
     end
   end
 end
