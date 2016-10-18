@@ -13,9 +13,7 @@
             data.submit();
           },
           done: function (e, data) {
-            console.log(data);
-            console.log(data.result);
-            data.context.text('Upload finished.');
+            location.reload();
           }
       });
   });
