@@ -14,8 +14,6 @@ Rails.application.routes.draw do
 
   resources :sharings, only: [:show, :index]
 
-  root to: 'home#index'
-
   resources :questions, except: [:new]
 
   resources :questionnaires do
@@ -25,5 +23,6 @@ Rails.application.routes.draw do
   get 'quizzes', to: 'quizzes#index'
   get 'quizzes/:questionnaire_id/take', to: 'quizzes#take'
 
+  root to: 'nodes#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
