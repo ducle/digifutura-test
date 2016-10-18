@@ -11,9 +11,9 @@
     - if @file_node
       %tr
         - if @file_node.parent
-          %th= link_to "...", node_path(@file_node.parent)
+          %th= link_to "...", sharing_path(@file_node.parent)
         - else
-          %th= link_to "Back to Files....", nodes_path
+          %th= link_to "Back to sharings....", sharings_path
         %th
         %th
     - nodes.each do |node|
