@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'therubyracer', platforms: :ruby
 gem "less-rails"
 gem 'bootstrap-sass'
+gem 'font-awesome-sass'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
