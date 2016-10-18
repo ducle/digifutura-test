@@ -1,0 +1,2 @@
+%li
+  = link_to_unless current_page.first?, raw(I18n.t 'kaminari.views.pagination.first'), url, :remote => remote, title: t('kaminari.views.pagination.first_title')
