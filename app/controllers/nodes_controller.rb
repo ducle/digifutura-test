@@ -1,5 +1,4 @@
 class NodesController < ApplicationController
-  layout 'landing'
 
   def index
     @nodes = my_nodes.roots.by_name.page(params[:page])
