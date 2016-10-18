@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.5'
 #  asset gems
 gem 'therubyracer', platforms: :ruby
 gem "less-rails"
-gem "twitter-bootstrap-rails", '~> 2.2.7'
+gem 'bootstrap-sass'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 

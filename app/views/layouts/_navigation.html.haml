@@ -1,0 +1,18 @@
+-# navigation styled for Bootstrap 3.0
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'Evaluation', root_url, class: "navbar-brand large-brand"
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li= link_to "Link 1", ""
+        %li= link_to "Link 2", ""
+        %li= link_to "Link 3", ""
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to 'Sign out', destroy_user_session_path
