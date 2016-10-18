@@ -1,0 +1,25 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  user: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: digifutura_test_development
+
+
+test:
+  <<: *default
+  database: digifutura_test_test
+
+
+production:
+  <<: *default
+  database: digifutura_test_production
+  username: <%= ENV['DIGIFUTURA_TEST_DATABASE_PASSWORD'] %>
+  password: <%= ENV['DIGIFUTURA_TEST_DATABASE_PASSWORD'] %>
