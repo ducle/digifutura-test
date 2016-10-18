@@ -1,17 +1,20 @@
 %h1 Listing questionnaires
 
-%table
-  %tr
-    %th Name
-    %th Questions count
-    %th
-
-  - @questionnaires.each do |questionnaire|
-    %tr
-      %td= link_to 'Show', questionnaire
-      %td= link_to 'Edit', edit_questionnaire_path(questionnaire)
-      %td= link_to 'Destroy', questionnaire, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
 = link_to 'New Questionnaire', new_questionnaire_path
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Questions count
+      %th
+      %th
+      %th
+  %tbody
+    - @questionnaires.each do |questionnaire|
+      %tr
+        %td= questionnaire.name
+        %td.w200= questionnaire.questions.count
+        %td.wbtn= link_to 'Show', questionnaire
+        %td.wbtn= link_to 'Edit', edit_questionnaire_path(questionnaire)
+        %td.wbtn= link_to 'Destroy', questionnaire, :method => :delete, :data => { :confirm => 'Are you sure?' }
