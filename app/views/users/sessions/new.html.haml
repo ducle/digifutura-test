@@ -1,0 +1,18 @@
+= content_for :title do
+  Sign In
+%div
+  %h2
+    Log in
+
+  %div
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = f.input :email, autofocus: true
+      = f.input :password, autofocus: true
+      - if devise_mapping.rememberable?
+        .checkbox
+          %label
+            = f.check_box :remember_me
+            Remember Me
+      = f.submit 'Login', class: 'btn btn-primary'
+
+    = render "users/shared/links"
