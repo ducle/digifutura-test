@@ -10,7 +10,8 @@ class NodesController < ApplicationController
   end
 
   def new
-    @file_node = my_nodes.folders.new(owner_id: current_user.id, parent_id: params[:parent_id])
+    @parent_node = my_nodes.folders.find_by_id(params[:parent_id])
+    @file_node = my_nodes.folders.new(owner_id: current_user.id, parent_id: @parent_node.try(:id))
   end
 
   def create
@@ -68,5 +69,12 @@ class NodesController < ApplicationController
 
   def my_nodes
     current_user.file_nodes
+  end
+
+  # prevent nesting file node
+  def ensure_nesting_folder
+    if @file_node.is_file?
+      redirect_to nodes_path
+    end
   end
 end

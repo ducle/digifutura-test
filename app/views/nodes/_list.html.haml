@@ -33,8 +33,14 @@
         %th
           - node.users.each do |user|
             %span.label.label-success= user.name
+
           = link_to sharing_node_path(node), remote: true, title: "Share #{node.name}", class: 'pull-right' do
             %i.fa.fa-share(aria-hidden="true")
+          - if node.is_file?
+            = link_to node.file.url, title: "Download file #{node.name}", class: 'pull-right', target: '_blank' do
+              &nbsp;
+              %i.fa.fa-download(aria-hidden="true")
+              &nbsp;
 
 .text-center
   = paginate nodes
