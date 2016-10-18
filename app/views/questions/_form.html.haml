@@ -5,6 +5,12 @@
     = f.input :questionnaire_id, as: :hidden
     = f.input :content
     = f.input :point, input_html: {min: 0}
+    #answers
+      %h3 Answers
+      = f.simple_fields_for :answers do |answer|
+        = render 'answer_fields', f: answer
+      .links
+        = link_to_add_association 'Add answer', f, :answers
 
   .form-actions
     = f.button :submit

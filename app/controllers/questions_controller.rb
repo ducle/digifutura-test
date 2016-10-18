@@ -18,7 +18,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    if @question.update(question_params)
+    if @question.save
       redirect_to @question, notice: 'Question was successfully created.'
     else
       render :new
@@ -45,6 +45,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:questionnaire_id, :content, :point)
+      params.require(:question).permit(:questionnaire_id, :content, :point,
+        answers_attributes: [:id, :content, :is_answer, :_destroy])
     end
 end
