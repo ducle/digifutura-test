@@ -21,6 +21,9 @@ class FileNode < ApplicationRecord
 
   before_save :caching_ancestry_values
 
+
+  validates :node_type, presence: true
+
   def is_folder?
     self.node_type == NODE_TYPES[:folder]
   end

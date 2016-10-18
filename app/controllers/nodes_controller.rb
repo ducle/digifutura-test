@@ -11,22 +11,21 @@ class NodesController < ApplicationController
   end
 
   def new
-    @file_node = FileNode.new(node_type: FileNode::NODE_TYPES[:folder], parent_id: params[:parent_id])
+    @file_node = FileNode.folders.new(owner_id: current_user.id, parent_id: params[:parent_id])
   end
 
   def create
-    @file_node = FileNode.new(node_param)
+    @file_node = FileNode.folders.new(node_param)
     @file_node.owner_id = current_user.id
     if @file_node.save
-      redirect_to :back
+      redirect_to nodes_path
     else
       render :new
     end
   end
 
   def upload
-    @file_node = FileNode.new(node_type: FileNode::NODE_TYPES[:file])
-    @file_node.owner_id = current_user.id
+    @file_node = FileNode.files.new(owner_id: current_user.id)
     if params[:files] && file = params[:files].first
       @file_node.file = file
       @file_node.parent_id = params[:parent_id]
