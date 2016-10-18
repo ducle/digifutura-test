@@ -1,0 +1,14 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th Questionnaire
+      %th Point
+
+  %tbody
+    - @questionnaires.each do |questionnaire|
+      %tr
+        %td= link_to questionnaire.name, questionnaire
+        - if (point = UserService.point(current_user, questionnaire)).nil?
+          %td.w200 Take quiz
+        - else
+          %td.w200= point
