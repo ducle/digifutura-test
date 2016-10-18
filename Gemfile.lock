@@ -255,8 +255,8 @@ DEPENDENCIES
   database_cleaner
   devise (~> 4.2.0)
   factory_girl_rails
-  font-awesome-sass
   faker
+  font-awesome-sass
   haml (~> 4.0.7)
   haml-rails
   jbuilder (~> 2.5)
