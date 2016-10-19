@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :questions, except: [:new]
 
   resources :questionnaires do
-    get :sharing, on: :member
+    get :sharing, :alert_answered, on: :member
     post :share, on: :member
     resources :questions, only: [:new]
   end

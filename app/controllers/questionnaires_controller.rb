@@ -1,6 +1,6 @@
 class QuestionnairesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy]
+  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :alert_answered]
 
   def index
     @questionnaires = Questionnaire.page(params[:page])
@@ -47,6 +47,13 @@ class QuestionnairesController < ApplicationController
     @questionnaire = current_user.questionnaires.find(params[:id])
     @questionnaire.user_ids = share_param[:user_ids]
     redirect_to questionnaires_path
+  end
+
+  def alert_answered
+    user = User.find params[:user_id]
+    if user.user_quizzes.where(questionnaire: @questionnaire).count == 0
+      @message = "#{user.name} has not taken the quiz yet"
+    end
   end
 
   private

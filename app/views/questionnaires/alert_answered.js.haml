@@ -1,0 +1,3 @@
+- if @message
+  $('#alertModal .modal-content').html("#{escape_javascript(render partial: 'alert_answered_modal', locals: {message: @message}) }");
+  $('#alertModal').modal('show');

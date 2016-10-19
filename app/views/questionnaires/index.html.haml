@@ -16,7 +16,11 @@
     - @questionnaires.each do |questionnaire|
       %tr
         %td= questionnaire.name
-        %td= questionnaire.users.pluck(:name).join(', ')
+        %td
+          - questionnaire.users.each_with_index do |u, index|
+            - if index > 0
+              \|
+            = link_to u.name, alert_answered_questionnaire_path(questionnaire, user_id: u.id), remote: true
         %td.w200= questionnaire.questions.count
         %td.wbtn= link_to 'Show', questionnaire
         %td.wbtn= link_to 'Edit', edit_questionnaire_path(questionnaire)
@@ -26,5 +30,9 @@
             %i.fa.fa-share(aria-hidden="true")
 
 #sharingModal.modal.fade(tabindex="-1" role="dialog")
+  .modal-dialog
+    .modal-content
+
+#alertModal.modal.fade(tabindex="-1" role="dialog")
   .modal-dialog
     .modal-content
