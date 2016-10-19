@@ -1,10 +1,9 @@
 %h1
   Files
   %span.pull-right
-    -# %input#fileupload(title="Upload file" type="file")
-    -#   %i.fa.fa-file-o
     = link_to new_node_path(parent_id: @parent.try(:id)), class: 'btn btn-primary', title: 'New Folder' do
       %i.fa.fa-folder-o
+      New Folder
 .progress-bar
 = render partial: 'nodes/list', locals: {nodes: @nodes}
 

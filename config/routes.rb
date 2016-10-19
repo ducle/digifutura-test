@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :questions, only: [:new]
   end
 
+  get '/labels', to: 'home#labels'
   get 'quizzes', to: 'quizzes#index'
   get 'quizzes/:questionnaire_id/take', to: 'quizzes#take'
 

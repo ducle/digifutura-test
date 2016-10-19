@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  def explore
-    
+  def labels
+
   end
 end
