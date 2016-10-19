@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   get '/labels', to: 'home#labels'
   get 'quizzes', to: 'quizzes#index'
-  get 'quizzes/:questionnaire_id/take', to: 'quizzes#take'
+  get 'quizzes/take/:questionnaire_id', to: 'quizzes#take', as: :take_quizzes
+  get 'quizzes/result/:questionnaire_id', to: 'quizzes#result', as: :result_quizzes
+  post 'quizzes/answer/:questionnaire_id', to: 'quizzes#answer', as: :answer_quizzes
 
   root to: 'nodes#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

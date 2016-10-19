@@ -1,0 +1,30 @@
+- if @questionnaire.questions.count > 0
+  = simple_form_for 'user_answers', url: answer_quizzes_path(questionnaire_id: @questionnaire), method: :post do |f|
+    %ol
+      - @questionnaire.questions.each_with_index do |question, index|
+        %li
+          = f.hidden_field :question_id, value: question.id, name: "user_answers[#{index}][question_id]", id: "user_answers_question_id_#{question.id}"
+          %h4= question.content
+          %ul.no-list.answers
+            - question.answers.each do |answer|
+              %li
+                %label
+                  = f.radio_button :answer_id, answer.id, name: "user_answers[#{index}][answer_id]"
+                  = answer.content
+
+    .form-actions
+      = f.button :submit, 'Submit'
+
+:erb
+  <script>
+    $(function() {
+      $('form').submit(function() {
+        <% @questionnaire.questions.each_with_index do |question, index| %>
+          if($(".answers [name='user_answers[<%= index %>][answer_id]']:checked").val() == null) {
+            alert('Please answer all questions')
+            return false;
+          }
+        <% end %>
+      })
+    })
+  </script>

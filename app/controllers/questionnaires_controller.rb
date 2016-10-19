@@ -50,9 +50,9 @@ class QuestionnairesController < ApplicationController
   end
 
   def alert_answered
-    user = User.find params[:user_id]
-    if user.user_quizzes.where(questionnaire: @questionnaire).count == 0
-      @message = "#{user.name} has not taken the quiz yet"
+    @user = User.find params[:user_id]
+    if @user.user_quizzes.where(questionnaire: @questionnaire).count == 0
+      @message = "#{@user.name} has not taken the quiz yet"
     end
   end
 

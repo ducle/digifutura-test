@@ -9,6 +9,6 @@
       %tr
         %td= link_to questionnaire.name, questionnaire
         - if (point = UserService.point(current_user, questionnaire)).nil?
-          %td.w200 Take quiz
+          %td.w200= link_to 'Take quiz', take_quizzes_path(questionnaire_id: questionnaire)
         - else
-          %td.w200= point
+          %td.w200= link_to point, result_quizzes_path(questionnaire_id: questionnaire)
