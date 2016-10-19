@@ -6,6 +6,8 @@
       %th
         Modified
       %th
+        Tags
+      %th
         Additional sharing
   %tbody
     - if @file_node
@@ -14,6 +16,7 @@
           %th= link_to "...", node_path(@file_node.parent)
         - else
           %th= link_to "Home", nodes_path
+        %th
         %th
         %th
     - nodes.each do |node|
@@ -30,6 +33,10 @@
             = node.updated_at.strftime('%m/%d/%Y %H:%M')
           - else
             \-.-
+        %th
+          - node.label_list.each do |lb|
+            %label.label.label-success
+              = lb
         %th
           - node.users.each do |user|
             %span.label.label-success= user.name

@@ -11,10 +11,11 @@
     .collapse.navbar-collapse
       - if current_user
         %ul.nav.navbar-nav
-          %li= link_to "Questionnaires", questionnaires_path
-          %li= link_to "Quizzes", quizzes_path
-          %li= link_to "Files", nodes_path
-          %li= link_to "Shared", sharings_path
+          %li{class: current_path?(/questionnaire/)}= link_to "Questionnaires", questionnaires_path
+          %li{class: current_path?(/quizzes/)}= link_to "Quizzes", quizzes_path
+          %li{class: current_path?(/files/)}= link_to "Files", nodes_path
+          %li{class: current_path?(/sharings/)}= link_to "Shared", sharings_path
+          %li{class: current_path?(/explore/)}= link_to "Explore", explore_path
         %ul.nav.navbar-nav.navbar-right.pull-right
           %li
             %a(type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
