@@ -13,10 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require turbolinks
+// require turbolinks
 //= require libs/jquery.ui.widget
 //= require libs/jquery.iframe-transport
 //= require libs/jquery.fileupload
 //= require libs/jquery.tokeninput
+//= require libs/bootstrap-tagsinput
 //= require cocoon
 //= require_tree .

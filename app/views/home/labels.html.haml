@@ -1,4 +1,9 @@
 = content_for :title do
-  File Labels
+  Explore Files
 %h1
-  File Labels
+  Explore Files
+.row
+  .col-md-3
+    = render partial: 'filterbox'
+  .col-md-9#listFiles
+    = render partial: 'list_files', locals: {nodes: @nodes}

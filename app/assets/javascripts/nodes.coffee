@@ -8,3 +8,22 @@ bindTokenAhead = (ele, data, populate)->
     })
 
 window.bindTokenInput = bindTokenAhead
+
+
+$ ()->
+  $('.taggable-tagsinput').tagsinput({
+      maxTags: 5
+      maxChars: 10
+      trimValue: true
+      allowDuplicates: false
+      freeInput: true
+  })
+  $('.taggable-tagsinput').on('itemAdded', (item)->
+    tagUrl = $(this).data('tagUrl')
+    items = $(this).tagsinput('items')
+    $.post(tagUrl, {tags: items}, ()=>)
+  ).on('itemRemoved', (item)->
+    tagUrl = $(this).data('tagUrl')
+    items = $(this).tagsinput('items')
+    $.post(tagUrl, {tags: items}, ()=>)
+  )

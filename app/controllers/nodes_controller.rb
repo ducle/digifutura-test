@@ -50,11 +50,15 @@ class NodesController < ApplicationController
     redirect_to node_path(@file_node.parent || @file_node)
   end
 
-  #  shared with me
-  def shared
-    @file_node = FileNode.find(params[:id])
-    @file_node.user_ids = share_param[:user_ids]
-    redirect_to node_path(@file_node.parent || @file_node)
+
+  def tagging
+    @file_node = current_user.my_files.find(params[:id])
+    @file_node.label_list = params[:tags]
+    if @file_node.save
+      render body: nil, status: 200
+    else
+      render body: nil, status: 400
+    end
   end
 
   private

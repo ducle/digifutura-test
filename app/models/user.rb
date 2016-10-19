@@ -15,5 +15,11 @@ class User < ApplicationRecord
   validates :name, presence: true, length: {minimum: 2, maximum: 40}
 
 
+  def my_files
+    file_nodes.files
+  end
 
+  def my_folders
+    file_nodes.folders
+  end
 end

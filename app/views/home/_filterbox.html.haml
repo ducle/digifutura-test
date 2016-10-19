@@ -1,0 +1,13 @@
+%h4
+  Labels
+= form_tag labels_path, class: 'formLabel', method: :get, remote: true do
+  %ul.nav
+    - ActsAsTaggableOn::Tag.most_used(10).each do |tag|
+      %li
+        .checkbox
+          %label
+            %input(type="checkbox" name="tags[]" value="#{tag.name}")
+            = tag.name
+    - if ActsAsTaggableOn::Tag.count == 0
+      %li.text-info
+        No labels

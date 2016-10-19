@@ -34,9 +34,8 @@
           - else
             \-.-
         %th
-          - node.label_list.each do |lb|
-            %label.label.label-success
-              = lb
+          - if node.is_file?
+            %input.form-control.taggable-tagsinput(type="text" value="#{node.label_list.join(',')}" placeholder="file label..." data-id="#{node.id}" data-tag-url="#{tagging_node_path(node)}")
         %th
           - node.users.each do |user|
             %span.label.label-success= user.name

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     member do
       get :sharing
       post :share
+      post :tagging
     end
   end
 
