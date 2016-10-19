@@ -39,6 +39,16 @@ class QuestionnairesController < ApplicationController
     redirect_to questionnaires_url, notice: 'Questionnaire was successfully destroyed.'
   end
 
+  def sharing
+    @questionnaire = current_user.questionnaires.find(params[:id])
+  end
+
+  def share
+    @questionnaire = current_user.questionnaires.find(params[:id])
+    @questionnaire.user_ids = share_param[:user_ids]
+    redirect_to questionnaires_path
+  end
+
   private
 
     def set_questionnaire
@@ -47,5 +57,9 @@ class QuestionnairesController < ApplicationController
 
     def questionnaire_params
       params.require(:questionnaire).permit(:name)
+    end
+
+    def share_param
+      params.require(:questionnaire).permit(:user_ids => [])
     end
 end

@@ -1,0 +1,21 @@
+= form_for questionnaire, url: share_questionnaire_path(questionnaire), method: :post do |f|
+  .modal-header
+    %button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+      %span(aria-hidden="true")
+        &times;
+    %h4.modal-title
+      %i.fa.fa-share-alt
+      Share
+      %strong.color-blue= questionnaire.name
+      with
+  .modal-body
+    %p
+      .form-group
+        = text_field_tag "questionnaire[user_ids][]", nil, class: 'form-control', id: 'tokenfield', placeholder: 'Enter name...'
+    %div
+
+  .modal-footer
+    %button(type="button" class="btn btn-default" data-dismiss="modal")
+      Close
+    %button(type="button" class="btn btn-primary" type="submit")
+      Save changes

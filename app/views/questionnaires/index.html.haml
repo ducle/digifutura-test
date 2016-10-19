@@ -6,7 +6,9 @@
   %thead
     %tr
       %th Name
+      %th Shared users
       %th Questions count
+      %th
       %th
       %th
       %th
@@ -14,7 +16,15 @@
     - @questionnaires.each do |questionnaire|
       %tr
         %td= questionnaire.name
+        %td= questionnaire.users.pluck(:name).join(', ')
         %td.w200= questionnaire.questions.count
         %td.wbtn= link_to 'Show', questionnaire
         %td.wbtn= link_to 'Edit', edit_questionnaire_path(questionnaire)
         %td.wbtn= link_to 'Destroy', questionnaire, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td.wbtn
+          = link_to sharing_questionnaire_path(questionnaire), remote: true, class: 'pull-right' do
+            %i.fa.fa-share(aria-hidden="true")
+
+#sharingModal.modal.fade(tabindex="-1" role="dialog")
+  .modal-dialog
+    .modal-content
