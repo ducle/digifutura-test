@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
-    @questions = Question.all
+    @questions = @questionnaire.questions
   end
 
   def show
@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = @questionnaire.questions.new
+    2.times { @question.answers.build }
   end
 
   def edit
@@ -41,7 +42,7 @@ class QuestionsController < ApplicationController
 
   private
     def set_questionnaire
-      @questionnaire = Questionnaire.find(params[:questionnaire_id])
+      @questionnaire = current_user.questionnaires.find(params[:questionnaire_id])
     end
 
     def set_question

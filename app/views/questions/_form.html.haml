@@ -1,5 +1,5 @@
 = simple_form_for([@questionnaire, @question]) do |f|
-  = f.error_notification
+  = f.error_notification(message: @question.errors.full_messages.join(', '))
 
   .form-inputs
     = f.input :questionnaire_id, as: :hidden
