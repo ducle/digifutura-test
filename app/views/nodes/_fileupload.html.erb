@@ -1,4 +1,31 @@
-<input id="fileupload" type="file" data-parent-id="<%= @file_node.try(:id) %>" multiple="false">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-uploader">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Upload to Evaluation</h4>
+      </div>
+      <div class="modal-body">
+        <div class="modal-data">
+          <p class='text-info'>
+            Choose file to upload to your Evaluation
+          </p>
+        </div>
+        <div class="text-right modal-actions">
+          <label class="btn btn-primary">
+            <input id="fileupload" type="file" data-parent-id="<%= @file_node.try(:id) %>" multiple="false" style="display: none;" accept='image/jpg,image/jpeg,image/png'>
+            <span>
+              Choose file
+            </span>
+            </label>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 <script>
   $(function () {
@@ -7,18 +34,27 @@
           dataType: 'json',
           type: 'POST',
           multipart: true,
+          maxFileSize: 500000,
           formData: {parent_id: $('#fileupload').data('parentId')},
           add: function (e, data) {
-            data.context = $('p').text('Uploading...').appendTo(document.body);
+            console.log(data);
+            var file = data.files[0]
+            data.context = $('<p/>').html(`${data.files[0].name}: <span class='text-warning'> uploading... </span>`).appendTo($('#modal-uploader .modal-data'));
             data.submit();
+            $('#modal-uploader .btn.btn-primary span').text('Add more files');
+            $('#modal-uploader .modal-data .text-info').hide();
           },
           done: function (e, data) {
+            console.log('done', data);
             if(data.result.status == 'OK'){
-              $("#flash-messages").html("<div class='alert alert-success fade in'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>Success! </strong> File has been uploaded.</div>");
-              location.reload();
+              data.context.html(`${data.files[0].name}: <span class='text-success'> uploaded! </span>`).appendTo($('#modal-uploader .modal-data'));
+              console.log(data.result);
+              $('#modal-uploader .btn.btn-default').text('Done');
+              // $("#flash-messages").html("<div class='alert alert-success fade in'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>Success! </strong> File has been uploaded.</div>");
             } else {
               console.log(data.result);
-              $("#flash-messages").html("<div class='alert alert-danger fade in'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>Error! </strong>"+data.result.message+"</div>")
+              data.context.html(`${data.files[0].name}: <span class='text-danger'> ERROR! </span>`).appendTo($('#modal-uploader .modal-data'));
+              // $("#flash-messages").html("<div class='alert alert-danger fade in'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>Error! </strong>"+data.result.message+"</div>")
             }
           }
       });

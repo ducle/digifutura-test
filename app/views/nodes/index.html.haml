@@ -4,6 +4,9 @@
     = link_to new_node_path(parent_id: @parent.try(:id)), class: 'btn btn-primary', title: 'New Folder' do
       %i.fa.fa-folder-o
       New Folder
+    = link_to '#', class: 'btn btn-success', title: 'Add File', 'data-toggle' => "modal", 'data-target' => "#modal-uploader" do
+      %i.fa.fa-file-o
+      Add File
 .progress-bar
 = render partial: 'nodes/list', locals: {nodes: @nodes}
 

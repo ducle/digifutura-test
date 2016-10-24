@@ -15,8 +15,11 @@
 //= require bootstrap-sprockets
 // require turbolinks
 //= require libs/jquery.ui.widget
+//= require libs/jquery.blueimp-gallery.min
 //= require libs/jquery.iframe-transport
 //= require libs/jquery.fileupload
+//= require libs/jquery.fileupload-process
+//= require libs/jquery.fileupload-image
 //= require libs/jquery.tokeninput
 //= require libs/bootstrap-tagsinput
 //= require cocoon
