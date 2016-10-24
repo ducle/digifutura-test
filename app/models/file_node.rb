@@ -25,6 +25,7 @@ class FileNode < ApplicationRecord
 
 
   validates :node_type, presence: true
+  validate :maximum_file_size
 
   def is_folder?
     self.node_type == NODE_TYPES[:folder]
@@ -69,6 +70,13 @@ class FileNode < ApplicationRecord
       self.ancestry = "#{parent.ancestry}#{self.parent_id}/"
     else
       self.ancestry = '/'
+    end
+  end
+
+
+  def maximum_file_size
+    if file && file.size > 50.megabytes
+      errors.add(:file, "can not be greater than 50MB")
     end
   end
 end

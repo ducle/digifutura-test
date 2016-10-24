@@ -13,7 +13,8 @@
         </div>
         <div class="text-right modal-actions">
           <label class="btn btn-primary">
-            <input id="fileupload" type="file" data-parent-id="<%= @file_node.try(:id) %>" multiple="false" style="display: none;" accept='image/jpg,image/jpeg,image/png'>
+            <!-- <input id="fileupload" type="file" data-parent-id="<%= @file_node.try(:id) %>" multiple="false" style="display: none;" accept='image/jpg,image/jpeg,image/png'> -->
+            <input id="fileupload" type="file" data-parent-id="<%= @file_node.try(:id) %>" multiple="false" style="display: none;">
             <span>
               Choose file
             </span>
@@ -28,35 +29,7 @@
 
 
 <script>
-  $(function () {
-      $('#fileupload').fileupload({
-          url: "<%= upload_nodes_path %>",
-          dataType: 'json',
-          type: 'POST',
-          multipart: true,
-          maxFileSize: 500000,
-          formData: {parent_id: $('#fileupload').data('parentId')},
-          add: function (e, data) {
-            console.log(data);
-            var file = data.files[0]
-            data.context = $('<p/>').html(`${data.files[0].name}: <span class='text-warning'> uploading... </span>`).appendTo($('#modal-uploader .modal-data'));
-            data.submit();
-            $('#modal-uploader .btn.btn-primary span').text('Add more files');
-            $('#modal-uploader .modal-data .text-info').hide();
-          },
-          done: function (e, data) {
-            console.log('done', data);
-            if(data.result.status == 'OK'){
-              data.context.html(`${data.files[0].name}: <span class='text-success'> uploaded! </span>`).appendTo($('#modal-uploader .modal-data'));
-              console.log(data.result);
-              $('#modal-uploader .btn.btn-default').text('Done');
-              // $("#flash-messages").html("<div class='alert alert-success fade in'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>Success! </strong> File has been uploaded.</div>");
-            } else {
-              console.log(data.result);
-              data.context.html(`${data.files[0].name}: <span class='text-danger'> ERROR! </span>`).appendTo($('#modal-uploader .modal-data'));
-              // $("#flash-messages").html("<div class='alert alert-danger fade in'><a href='#'' class='close' data-dismiss='alert'>&times;</a><strong>Error! </strong>"+data.result.message+"</div>")
-            }
-          }
-      });
+  $(document).ready(function () {
+      jsUploader('#fileupload', '#modal-uploader', "<%= upload_nodes_path %>");
   });
 </script>

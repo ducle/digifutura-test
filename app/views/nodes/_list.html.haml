@@ -20,33 +20,6 @@
         %th
         %th
     - nodes.each do |node|
-      %tr
-        %th
-          - if node.is_file?
-            %i.fa.fa-file-o
-            = node.name
-          - else
-            %i.fa.fa-folder-o
-            = link_to node.name, node_path(node)
-        %th
-          - if node.is_file?
-            = node.updated_at.strftime('%m/%d/%Y %H:%M')
-          - else
-            \-.-
-        %th
-          - if node.is_file?
-            %input.form-control.taggable-tagsinput(type="text" value="#{node.label_list.join(',')}" placeholder="file label..." data-id="#{node.id}" data-tag-url="#{tagging_node_path(node)}")
-        %th
-          - node.users.each do |user|
-            %span.label.label-success= user.name
-
-          = link_to sharing_node_path(node), remote: true, title: "Share #{node.name}", class: 'pull-right' do
-            %i.fa.fa-share(aria-hidden="true")
-          - if node.is_file?
-            = link_to node.file.url, title: "Download file #{node.name}", class: 'pull-right', target: '_blank' do
-              &nbsp;
-              %i.fa.fa-download(aria-hidden="true")
-              &nbsp;
-
+      = render partial: 'nodes/list_row', locals: {node: node}
 .text-center
   = paginate nodes

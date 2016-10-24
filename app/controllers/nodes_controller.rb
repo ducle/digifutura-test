@@ -15,7 +15,9 @@ class NodesController < ApplicationController
   end
 
   def create
+    @parent_node = my_nodes.folders.find_by(id: node_param[:parent_id])
     @file_node = my_nodes.folders.new(node_param)
+    @file_node.parent_id = @parent_node.try(:id)
     @file_node.owner_id = current_user.id
     if @file_node.save
       redirect_to nodes_path
@@ -25,11 +27,11 @@ class NodesController < ApplicationController
   end
 
   def upload
-    parent_node = my_nodes.folders.find_by(id: params[:parent_id])
+    @parent_node = my_nodes.folders.find_by(id: params[:parent_id])
     @file_node = my_nodes.files.new(owner_id: current_user.id)
     if params[:files] && file = params[:files].first
       @file_node.file = file
-      @file_node.parent_id = parent_node.try(:id)
+      @file_node.parent_id = @parent_node.try(:id)
       @file_node.name = file.original_filename
       @file_node.file_size = file.size
     end
