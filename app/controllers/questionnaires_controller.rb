@@ -3,7 +3,7 @@ class QuestionnairesController < ApplicationController
   before_action :set_questionnaire, only: [:show, :edit, :update, :destroy, :alert_answered]
 
   def index
-    @questionnaires = Questionnaire.page(params[:page])
+    @questionnaires = current_user.questionnaires.page(params[:page])
   end
 
   def show
@@ -59,7 +59,7 @@ class QuestionnairesController < ApplicationController
   private
 
     def set_questionnaire
-      @questionnaire = Questionnaire.find(params[:id])
+      @questionnaire = current_user.questionnaires.find(params[:id])
     end
 
     def questionnaire_params
