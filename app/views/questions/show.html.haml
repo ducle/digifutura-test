@@ -1,7 +1,7 @@
 %p#notice= notice
-= link_to 'Edit', edit_question_path(@question)
+= link_to 'Edit', edit_questionnaire_question_path(@question, questionnaire_id: @questionnaire)
 \|
-= link_to 'Back', @question.questionnaire
+= link_to 'Back', @questionnaire
 
 %table.table
   %tbody.show

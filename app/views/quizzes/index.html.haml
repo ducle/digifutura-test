@@ -7,7 +7,7 @@
   %tbody
     - @questionnaires.each do |questionnaire|
       %tr
-        %td= link_to questionnaire.name, questionnaire
+        %td= questionnaire.name
         - if (point = UserService.point(current_user, questionnaire)).nil?
           %td.w200= link_to 'Take quiz', take_quizzes_path(questionnaire_id: questionnaire)
         - else

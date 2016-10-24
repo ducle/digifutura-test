@@ -8,11 +8,11 @@
 
   %tbody
     - @questionnaire.questions.each_with_index do |question, index|
-      - answer = @user.user_answers.where(question: question).last.answer
+      - answer = @user.user_answers.where(question: question).last.try(:answer)
       %tr
-        %td= link_to question.content, question
+        %td= question.content
         %td= question.answers.where(is_answer: true).first.try(:content)
         %td.w200= answer.try(:content)
-        %td.w200= answer.is_answer ? question.point : 0
+        %td.w200= answer.try(:is_answer) ? question.point : 0
 
 %h3 Total: #{UserService.point(@user, @questionnaire)}

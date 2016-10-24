@@ -15,12 +15,10 @@ Rails.application.routes.draw do
 
   resources :sharings, only: [:show, :index]
 
-  resources :questions, except: [:new]
-
   resources :questionnaires do
     get :sharing, :alert_answered, on: :member
     post :share, on: :member
-    resources :questions, only: [:new]
+    resources :questions
   end
 
   get '/labels', to: 'home#labels'

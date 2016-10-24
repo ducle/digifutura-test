@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_questionnaire
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -10,7 +11,6 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @questionnaire = Questionnaire.find params[:questionnaire_id]
     @question = @questionnaire.questions.new
   end
 
@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     if @question.save
-      redirect_to @question, notice: 'Question was successfully created.'
+      redirect_to [@questionnaire, @question], notice: 'Question was successfully created.'
     else
       render :new
     end
@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      redirect_to @question, notice: 'Question was successfully updated.'
+      redirect_to [@questionnaire, @question], notice: 'Question was successfully updated.'
     else
       render :edit
     end
@@ -40,9 +40,12 @@ class QuestionsController < ApplicationController
   end
 
   private
+    def set_questionnaire
+      @questionnaire = Questionnaire.find(params[:questionnaire_id])
+    end
 
     def set_question
-      @question = Question.find(params[:id])
+      @question = @questionnaire.questions.find(params[:id])
     end
 
     def question_params

@@ -1,7 +1,7 @@
 %h1 Editing question
 
-= link_to 'Show', @question
+= link_to 'Show', [@questionnaire, @question]
 \|
-= link_to 'Back', @question.questionnaire
+= link_to 'Back', @questionnaire
 
 = render 'form'
